@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  nginx:
+    ports:
+      - "80:80"
+
+  node-app:
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=zeeshan
+      - MONGO_PASSWORD=mypassword
+      - SESSION_SECRET=secret
+    command: yarn dev
